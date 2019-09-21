@@ -1,4 +1,4 @@
-package jp.co.pokemon.config;
+package jp.co.pokemon.security;
 
 import jp.co.pokemon.entity.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,7 +16,7 @@ public class SimpleLoginUser extends org.springframework.security.core.userdetai
     }
 
     public SimpleLoginUser(User user) {
-        super(user.getName(), user.getPassword(), determineRoles(user.isAdminFlg()));
+        super(user.getName(), user.getPassword(), determineRoles(user.getAdmin()));
         this.user = user;
     }
 

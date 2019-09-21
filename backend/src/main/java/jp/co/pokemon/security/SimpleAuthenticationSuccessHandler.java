@@ -1,4 +1,4 @@
-package jp.co.pokemon.config;
+package jp.co.pokemon.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,8 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * 認証が成功した時の処理
+ */
 @Slf4j
 public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+
+    public SimpleAuthenticationSuccessHandler() {
+    }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
@@ -23,7 +29,6 @@ public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccess
             log.info("Response has already been committed.");
             return;
         }
-
         response.setStatus(HttpStatus.OK.value());
         clearAuthenticationAttributes(request);
     }
@@ -40,4 +45,5 @@ public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccess
         }
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
     }
+
 }

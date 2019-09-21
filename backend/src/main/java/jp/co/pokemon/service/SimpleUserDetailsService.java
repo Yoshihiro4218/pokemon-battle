@@ -1,6 +1,6 @@
 package jp.co.pokemon.service;
 
-import jp.co.pokemon.config.SimpleLoginUser;
+import jp.co.pokemon.security.SimpleLoginUser;
 import jp.co.pokemon.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

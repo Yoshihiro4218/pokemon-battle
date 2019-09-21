@@ -1,4 +1,4 @@
-package jp.co.pokemon.config;
+package jp.co.pokemon.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -23,45 +23,52 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // @formatter:off
         http
-                // AUTHORIZE
-                .authorizeRequests()
+            // AUTHORIZE
+            .authorizeRequests()
                 .mvcMatchers("/prelogin", "/hello/**")
-                .permitAll()
+                    .permitAll()
                 .mvcMatchers("/user/**")
-                .hasRole("USER")
+                    .hasRole("USER")
                 .mvcMatchers("/admin/**")
-                .hasRole("ADMIN")
+                    .hasRole("ADMIN")
                 .anyRequest()
-                .authenticated()
-                .and()
-                // EXCEPTION
-                .exceptionHandling()
+                    .authenticated()
+            .and()
+            // EXCEPTION
+            .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint())
                 .accessDeniedHandler(accessDeniedHandler())
-                .and()
-                // LOGIN
-                .formLogin()
+            .and()
+            // LOGIN
+            .formLogin()
                 .loginProcessingUrl("/login").permitAll()
-                .usernameParameter("email")
-                .passwordParameter("pass")
+                    .usernameParameter("email")
+                    .passwordParameter("pass")
                 .successHandler(authenticationSuccessHandler())
                 .failureHandler(authenticationFailureHandler())
-                .and()
-                // LOGOUT
-                .logout()
+            .and()
+            // LOGOUT
+            .logout()
                 .logoutUrl("/logout")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessHandler(logoutSuccessHandler())
                 //.addLogoutHandler(new CookieClearingLogoutHandler())
-                .and()
-                // CSRF
-                .csrf()
+            .and()
+             // CSRF
+            .csrf()
                 //.disable()
                 //.ignoringAntMatchers("/login")
                 .csrfTokenRepository(new CookieCsrfTokenRepository())
-        ;
+            .and()
+            // SESSION
+            .sessionManagement()
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(false)
+            ;
+        // @formatter:on
     }
 
     @Autowired
@@ -75,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
     AuthenticationEntryPoint authenticationEntryPoint() {

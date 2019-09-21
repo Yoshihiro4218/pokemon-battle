@@ -1,4 +1,4 @@
-package jp.co.pokemon.config;
+package jp.co.pokemon.security;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
@@ -9,7 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 認証が失敗した時の処理
+ */
 public class SimpleAuthenticationFailureHandler implements AuthenticationFailureHandler {
+
+    public SimpleAuthenticationFailureHandler() {
+    }
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request,
