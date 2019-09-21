@@ -1,0 +1,11 @@
+version: 2
+services:
+  mysql:
+    build: mysql
+    volumes:
+      ## 永続化 ##
+      - "./docker/mysql/data:/var/lib/mysql"
+      ## 初期データ投入 ##
+#      - "./docker/mysql/init:/docker-entrypoint-initdb.d"
+    ports:
+      - "3306:3306"
