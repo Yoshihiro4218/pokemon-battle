@@ -14,7 +14,7 @@ Vue.filter('moneyDelemiter', function(val){
   return Number(val).toLocaleString(); //3桁区切りでカンマをつける
 });
 new Vue({
-  el: "#testDiv",
+  el: "",
   data: {iminteger:654321},
 
 })
