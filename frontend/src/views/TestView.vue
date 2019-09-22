@@ -18,10 +18,8 @@
                 price: 123456,
             }
         },
-        components: {
-        },
-        computed: {
-        },
+        components: {},
+        computed: {},
         watch: {
             items() {
             }

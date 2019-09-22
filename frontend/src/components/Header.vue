@@ -34,10 +34,6 @@
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>
-
-        <div id="app">
-            <router-view/>
-        </div>
     </div>
 </template>
 
