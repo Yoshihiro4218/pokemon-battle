@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '../views/Login'
+import Login from '../views/LoginView'
 import Test from '../views/TestView'
 import PokeList from '../views/PokeListView'
 
