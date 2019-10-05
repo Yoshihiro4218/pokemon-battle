@@ -1,7 +1,7 @@
 <template>
 <div class="pokeImgsDiv">
             <div class="pokeImgDiv" v-for="imgUrl of imgUrls" v-bind:key="imgUrls">
-                <img class="pokeImg" v-bind:src="imgUrl">
+                <img alt="pokemon" class="pokeImg" v-bind:src="imgUrl">
             </div>
 </div>
 </template>
@@ -25,7 +25,6 @@
             for(let i=1; i<=151 ; i++ ) {
                 this.imgUrls.push(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png`);
             }
-            console.log(this.imgUrls);
         },
         methods: {
         }
@@ -48,6 +47,12 @@
     }
 
     .pokeImg {
+    }
+
+    .pokeImg:hover {
+        color: red;
+        cursor: pointer;
+        outline: 1px solid gray;
     }
 
 </style>
