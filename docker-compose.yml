@@ -1,11 +1,15 @@
-version: 2
+version: '2'
+
 services:
-  mysql:
-    build: mysql
-    volumes:
-      ## 永続化 ##
-      - "./docker/mysql/data:/var/lib/mysql"
-      ## 初期データ投入 ##
-#      - "./docker/mysql/init:/docker-entrypoint-initdb.d"
+  db:
+    image: mysql:8.0.17
+    environment:
+      MYSQL_DATABASE: 'pokemon'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'root_password'
     ports:
       - "3306:3306"
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d

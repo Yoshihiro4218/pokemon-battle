@@ -1,8 +1,9 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/pokemon
-    username: root
     driver-class-name: com.mysql.jdbc.Driver
+    username: user
+    password: password
   main:
     allow-bean-definition-overriding: true
 
