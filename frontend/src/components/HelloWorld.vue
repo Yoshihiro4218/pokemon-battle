@@ -1,9 +1,9 @@
 <template>
     <div class="hello">
         <h1>{{ msg }}</h1>
-        <router-link to="/test">Go to Test</router-link><br>
-        <router-link to="/pokeList">Go to pokeList</router-link><br>
-        <router-link to="/login">Go to login</router-link><br>
+        <router-link class="routerLink" to="/test">Go to Test<br></router-link>
+        <router-link class="routerLink" to="/pokeList">Go to pokeList<br></router-link>
+        <router-link class="routerLink" to="/login">Go to login<br></router-link>
 
     </div>
 </template>
@@ -18,5 +18,8 @@
 </script>
 
 <style scoped>
+    .routerLink {
+        font-size: 20px;
+    }
 
 </style>

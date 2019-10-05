@@ -33,7 +33,6 @@
 
 <style scoped>
     .pokeImgsDiv {
-        width: 1300px;
         text-align: center;
         position: relative;
         display: block;
