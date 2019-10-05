@@ -5,6 +5,8 @@ import jp.co.pokemon.repository.UserRepository;
 import jp.co.pokemon.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public String create(String username, String rawPassword, String email) {
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
         User user = User.of(username, encoder.encode(rawPassword), email);
         userRepository.save(user);
