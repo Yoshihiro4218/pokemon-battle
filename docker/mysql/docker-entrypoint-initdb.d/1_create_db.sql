@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS user(
   email VARCHAR(256) NOT NULL,
   admin_flag BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (id),
+  UNIQUE KEY (name),
   UNIQUE KEY (email)
 );
 
