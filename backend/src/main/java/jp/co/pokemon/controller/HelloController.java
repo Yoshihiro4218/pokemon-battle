@@ -12,11 +12,16 @@ import org.springframework.web.bind.annotation.*;
 public class HelloController {
 
     @GetMapping
-    public String greeting(@AuthenticationPrincipal(expression = "user") User user, CsrfToken csrfToken) {
-        log.debug("token : {}", csrfToken.getToken());
-        log.debug("access user : {}", user.toString());
+    public String greeting() {
         return "hello world";
     }
+
+//    @GetMapping
+//    public String greeting(@AuthenticationPrincipal(expression = "user") User user, CsrfToken csrfToken) {
+//        log.debug("token : {}", csrfToken.getToken());
+//        log.debug("access user : {}", user.toString());
+//        return "hello world";
+//    }
 
     @GetMapping(path = "{message}")
     public String greeting(@PathVariable(name = "message") String message) {
