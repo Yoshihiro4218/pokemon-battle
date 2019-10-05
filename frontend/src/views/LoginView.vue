@@ -2,23 +2,24 @@
     <div class="loginDiv">
         <h2>LoginForm!!</h2>
 
-        <form>
+        <form name="loginForm">
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                       placeholder="Enter email">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                       placeholder="Enter email" name="email">
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
                     else.</small>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password"
+                       placeholder="Password" name="password">
             </div>
             <div class="form-group form-check" style="display: none;">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary" v-on:click="login">Submit</button>
         </form>
     </div>
 </template>
@@ -31,6 +32,7 @@
         data() {
             return {
                 items: [],
+                csrf: "",
             }
         },
         components: {},
@@ -43,9 +45,21 @@
             axios.get("/api/prelogin")
                 .then((res) => {
                     console.log(res.data);
+                    this.csrf = res.data;
                 })
         },
-        methods: {}
+        methods: {
+            login() {
+                let params = new URLSearchParams();
+                params.append('email', document.getElementById("email").value);
+                params.append('pass', document.getElementById("password").value);
+                params.append('_csrf', this.csrf);
+                console.log(document.getElementById("email").value);
+                console.log(this.csrf);
+                console.log(params);
+                axios.post("/api/login", params).then((res)=>{console.log(res)});
+            }
+        }
     }
 </script>
 
