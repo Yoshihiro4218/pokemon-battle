@@ -1,16 +1,14 @@
 <template>
     <div id="app">
         <Header msg="Header"/>
-        <img alt="Vue logo" src="./assets/logo.png">
+        <img alt="Dragon" src="./assets/logo.png" width="300px">
         <router-view/>
-        <HelloWorld msg="Welcome to Your Vue.js App"/>
-        <Test msg="Pokemon"/>
+        <HelloWorld msg="Welcome to PokemonBattle!" style="margin-top: 200px;"/>
     </div>
 </template>
 
 <script>
     import HelloWorld from './components/HelloWorld.vue'
-    import Test from './components/Test.vue'
     import Header from './components/Header.vue'
 
     export default {
@@ -18,7 +16,6 @@
         components: {
             Header,
             HelloWorld,
-            Test
         }
     }
 </script>
