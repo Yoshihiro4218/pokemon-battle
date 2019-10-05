@@ -1,6 +1,9 @@
 package jp.co.pokemon.controller;
 
+import jp.co.pokemon.entity.User;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -9,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 public class HelloController {
 
     @GetMapping
-    public String greeting() {
+    public String greeting(@AuthenticationPrincipal(expression = "user") User user, CsrfToken csrfToken) {
+        log.debug("token : {}", csrfToken.getToken());
+        log.debug("access user : {}", user.toString());
         return "hello world";
     }
 
