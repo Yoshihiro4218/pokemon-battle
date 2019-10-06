@@ -26,6 +26,8 @@
 
 <script>
     import axios from 'axios'
+    import store from '../store/index.js'
+    import { mapState } from 'vuex'
 
     export default {
         name: "Login",
@@ -57,7 +59,11 @@
                 console.log(document.getElementById("email").value);
                 console.log(this.csrf);
                 console.log(params);
-                axios.post("/api/login", params).then((res)=>{console.log(res)});
+                axios.post("/api/login", params).then((res)=>{
+                    console.log(res)
+                    this.$router.push("/trainersList")
+
+                });
             }
         }
     }

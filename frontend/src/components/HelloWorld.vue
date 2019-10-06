@@ -4,6 +4,7 @@
         <router-link class="routerLink" to="/test">Go to Test<br></router-link>
         <router-link class="routerLink" to="/pokeList">Go to pokeList<br></router-link>
         <router-link class="routerLink" to="/login">Go to login<br></router-link>
+        <router-link class="routerLink" to="/trainerList">Go to trainerList<br></router-link>
 
     </div>
 </template>
