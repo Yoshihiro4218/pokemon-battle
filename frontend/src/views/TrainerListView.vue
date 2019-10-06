@@ -1,22 +1,30 @@
 <template>
-<div class="trainerListDiv">
-            <div class="trainersDiv" v-for="(trainer, idx) of trainers" :key="idx">
-                <div class="card text-white bg-primary mb-3">
-                    <div class="card-header">{{trainer.trainerName}}</div>
-                    <div class="card-body">
-                        <img class="card-title" src="../assets/img/trainer_leaf.jpeg" />
-                        <p class="card-text">勝った回数：{{trainer.winningCount}}</p>
-                        <p class="card-text">負けた回数：{{trainer.losingCount}}</p>
-                    </div>
+    <div class="trainerListDiv">
+        <div class="trainersDiv" v-for="(trainer, idx) of trainers" :key="idx">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">{{trainer.trainerName}}</div>
+                <div class="card-body">
+                    <img class="card-title" src="../assets/img/trainer_leaf.jpeg"/>
+                    <p class="card-text">勝った回数：{{trainer.winningCount}}</p>
+                    <p class="card-text">負けた回数：{{trainer.losingCount}}</p>
                 </div>
             </div>
-</div>
+        </div>
+
+        <div class="card text-white bg-danger trainersDiv pleaseCreate" v-if="trainerExist===false">
+            <div class="card-header">トレーナーがまだいないようです</div>
+            <div class="card-body">
+                <p class="card-text">クリックでトレーナーを作成！</p>
+            </div>
+        </div>
+
+    </div>
 </template>
 
 <script>
     import axios from 'axios'
     import store from '../store/index.js'
-    import { mapState } from 'vuex'
+    import {mapState} from 'vuex'
 
     export default {
         name: "TrainerListView",
@@ -24,6 +32,7 @@
             return {
                 items: [],
                 trainers: [],
+                trainerExist: true,
             }
         },
         components: {},
@@ -35,11 +44,11 @@
         mounted() {
             axios.get("/api/trainers").then((res) => {
                 this.trainers = res.data;
-                console.log(res.data);
+                if (res.data.length === 0) this.trainerExist = false;
+                    console.log(res.data);
             })
         },
-        methods: {
-        }
+        methods: {}
     }
 </script>
 
@@ -54,8 +63,9 @@
     .trainersDiv:hover {
         color: red;
         cursor: pointer;
-        box-shadow: 0 5px 10px 0 rgba(0,0,0,.5);
+        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .5);
     }
+
     .mb-3 {
         margin-bottom: 0 !important;
     }
@@ -67,6 +77,10 @@
 
     .card-title {
         width: 150px;
+    }
+
+    .pleaseCreate {
+        width: 400px;
     }
 
 </style>
