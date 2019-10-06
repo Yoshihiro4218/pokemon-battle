@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.pokemon.repository.TrainerRepository">
+    <resultMap id="trainerResultMap" type="jp.co.pokemon.entity.Trainer">
+        <id property="id" column="id" />
+        <result property="userId" column="user_id" />
+        <result property="trainerName" column="trainer_name" />
+        <result property="winningCount" column="winning_count" />
+        <result property="losingCount" column="losing_count" />
+        <result property="battleFlg" column="battle_flg" />
+    </resultMap>
+
+    <select id="findByUserId" resultMap="trainerResultMap">
+        SELECT id,
+               user_id,
+               trainer_name,
+               winning_count,
+               losing_count,
+               battle_flg
+
+        FROM pokemon.trainer
+
+        WHERE user_id = #{userId};
+    </select>
+
+</mapper>
