@@ -19,8 +19,6 @@ jpa:
       use_sql_comments: true
       generate_statistics: false
 
-
-
 server:
   port: 8090
   servlet:
