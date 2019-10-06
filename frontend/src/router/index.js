@@ -4,8 +4,9 @@ import Login from '../views/LoginView'
 import Test from '../views/TestView'
 import PokeList from '../views/PokeListView'
 import TrainerList from '../views/TrainerListView'
+import MyPokeList from '../views/MyPokeListView'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
     mode: 'history',
@@ -29,6 +30,11 @@ export default new Router({
             path: '/trainerList',
             name: 'trainerList',
             component: TrainerList
+        },
+        {
+            path: '/myPokeList',
+            name: 'myPokeList',
+            component: MyPokeList
         },
     ]
 })

@@ -1,5 +1,5 @@
 <template>
-    <div class="trainerListDiv">
+    <div class="trainerListDiv" v-on:click="pushMyPokeList">
         <div class="trainersDiv" v-for="(trainer, idx) of trainers" :key="idx">
             <div class="card text-white bg-primary mb-3">
                 <div class="card-header">{{trainer.trainerName}}</div>
@@ -48,7 +48,12 @@
                     console.log(res.data);
             })
         },
-        methods: {}
+        methods: {
+            pushMyPokeList() {
+                // TODO: トレーナーごとのポケモン表示 backend未済
+                this.$router.push(`/myPokeList`);
+            }
+        }
     }
 </script>
 
