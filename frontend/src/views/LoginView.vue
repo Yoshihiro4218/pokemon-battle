@@ -61,7 +61,7 @@
                 console.log(params);
                 axios.post("/api/login", params).then((res)=>{
                     console.log(res)
-                    this.$router.push("/trainersList")
+                    this.$router.push("/trainerList")
 
                 });
             }
