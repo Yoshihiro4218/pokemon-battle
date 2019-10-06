@@ -1,7 +1,7 @@
 <template>
 <div class="trainerListDiv">
             <div class="trainersDiv" v-for="(trainer, idx) of trainers" :key="idx">
-                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                <div class="card text-white bg-primary mb-3">
                     <div class="card-header">{{trainer.trainerName}}</div>
                     <div class="card-body">
                         <img class="card-title" src="../assets/img/trainer_leaf.jpeg" />
@@ -45,6 +45,7 @@
 
 <style scoped>
     .trainersDiv {
+        width: 300px;
         display: inline-block;
         margin-left: 40px;
         margin-right: 40px;
@@ -60,7 +61,7 @@
     }
 
     .card-header {
-        font-size: x-large;
+        font-size: large;
         font-family: "Hiragino Kaku Gothic Pro";
     }
 
