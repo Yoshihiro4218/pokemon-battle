@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.pokemon.repository.PocketRepository">
+
+    <select id="findByTrainerId" resultType="Pocket">
+        SELECT id,
+               trainer_id,
+               position,
+               pk_id
+
+        FROM pokemon.pocket_pk
+
+        WHERE trainer_id = #{trainer_id};
+    </select>
+
+</mapper>
