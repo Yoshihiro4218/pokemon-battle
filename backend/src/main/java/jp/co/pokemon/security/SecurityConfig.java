@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -51,10 +52,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             // LOGOUT
             .logout()
-                .logoutUrl("/logout")
+//                .logoutUrl("/logout")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessHandler(logoutSuccessHandler())
+                .permitAll()
                 //.addLogoutHandler(new CookieClearingLogoutHandler())
             .and()
              // CSRF
