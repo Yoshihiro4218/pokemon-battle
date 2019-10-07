@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface TrainerService {
 
     Optional<List<Trainer>> findByUserId(int userId);
+    Optional<Trainer> findByTrainerId(int trainerId);
 }

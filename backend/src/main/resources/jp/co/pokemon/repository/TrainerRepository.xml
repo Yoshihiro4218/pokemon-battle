@@ -26,4 +26,17 @@
         WHERE user_id = #{userId};
     </select>
 
+    <select id="findByTrainerId" resultMap="trainerResultMap">
+        SELECT id,
+               user_id,
+               trainer_name,
+               winning_count,
+               losing_count,
+               battle_flg
+
+        FROM pokemon.trainer
+
+        WHERE id = #{trainerId};
+    </select>
+
 </mapper>

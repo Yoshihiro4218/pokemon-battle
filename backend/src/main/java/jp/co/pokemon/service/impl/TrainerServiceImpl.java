@@ -25,4 +25,9 @@ public class TrainerServiceImpl implements TrainerService {
         log.info("TrainerList={}", maybeTrainerList);
         return maybeTrainerList;
     }
+
+    @Override
+    public Optional<Trainer> findByTrainerId(int trainerId) {
+        return Optional.ofNullable(trainerRepository.findByTrainerId(trainerId));
+    }
 }

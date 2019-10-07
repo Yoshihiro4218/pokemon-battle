@@ -8,4 +8,5 @@ import java.util.List;
 @Mapper
 public interface TrainerRepository {
     List<Trainer> findByUserId(int userId);
+    Trainer findByTrainerId(int trainerId);
 }
