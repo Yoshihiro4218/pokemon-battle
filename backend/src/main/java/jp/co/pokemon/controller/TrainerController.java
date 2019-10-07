@@ -23,8 +23,7 @@ public class TrainerController {
 
     @GetMapping("")
     public List<Trainer> getMyTrainerList(Authentication authentication) {
-        String name = authentication.getName();
-        log.info("LoggingIn!={}", name);
-        return userService.findByName(name).flatMap(u -> trainerService.findByUserId(u.getId().intValue())).get();
+        return userService.sessionUser(authentication)
+                          .flatMap(u -> trainerService.findByUserId(u.getId().intValue())).get();
     }
 }

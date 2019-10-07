@@ -4,6 +4,7 @@ import jp.co.pokemon.entity.User;
 import jp.co.pokemon.repository.UserRepository;
 import jp.co.pokemon.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,12 +28,18 @@ public class UserServiceImpl implements UserService {
         return userRepository.findFirstByName(name);
     }
 
+    @Override
     public String create(String username, String rawPassword, String email) {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
         User user = User.of(username, encoder.encode(rawPassword), email);
         userRepository.save(user);
         return "create success!";
+    }
+
+    @Override
+    public Optional<User> sessionUser(Authentication authentication) {
+         return findByName(authentication.getName());
     }
 
 }
