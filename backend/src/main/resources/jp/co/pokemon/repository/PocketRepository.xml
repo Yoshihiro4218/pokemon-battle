@@ -21,5 +21,4 @@
 
         WHERE trainer_id = #{trainer_id};
     </select>
-
 </mapper>

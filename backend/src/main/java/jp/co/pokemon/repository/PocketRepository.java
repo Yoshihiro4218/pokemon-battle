@@ -8,4 +8,5 @@ import java.util.List;
 @Mapper
 public interface PocketRepository {
     List<Pocket> findByTrainerId(int trainerId);
+    Pocket findOnePocketByTrainerId(int trainerId);
 }

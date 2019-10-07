@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,10 +27,9 @@ public class PocketController {
     private final PocketService pocketService;
 
     @GetMapping("")
-    public List<Pocket> getMyPocketPkList(Authentication authentication) {
-        String name = authentication.getName();
-        log.info("LoggingIn!={}", name);
-        List<Trainer> trainerList = userService.findByName(name).flatMap(u -> trainerService.findByUserId(u.getId().intValue())).get();
+    public List<Pocket> getMyAllPocketPkList(Authentication authentication) {
+        List<Trainer> trainerList = userService.sessionUser(authentication)
+                                               .flatMap(u -> trainerService.findByUserId(u.getId().intValue())).get();
         // TODO: そもそもJOINで取るべきです、ごめんなさい。。
         List<Pocket> pocketList = new ArrayList<>();
         for (Trainer trainer : trainerList) {
@@ -37,5 +37,17 @@ public class PocketController {
         }
         log.info("PocketList={}", pocketList);
         return pocketList;
+    }
+
+    @GetMapping("/{trainerId}")
+    public List<Pocket> getMyPocketPkList(@PathVariable("trainerId") int trainerId, Authentication authentication) {
+        return userService.sessionUser(authentication)
+                          .flatMap(u -> trainerService.findByUserId(u.getId().intValue()))
+                          .orElseThrow(() -> new RuntimeException("No Trainer..."))
+                          .stream()
+                          .filter(t -> t.getId() == trainerId)
+                          .findFirst()
+                          .flatMap(t -> pocketService.findByTrainerId(t.getId()))
+                          .orElseThrow(() -> new RuntimeException("No Pokemon..."));
     }
 }
