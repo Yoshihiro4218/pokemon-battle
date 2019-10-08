@@ -1,9 +1,9 @@
 <template>
-<div class="pokeImgsDiv">
-            <div class="pokeImgDiv" v-for="imgUrl of imgUrls" v-bind:key="imgUrls">
-                <img alt="pokemon" class="pokeImg" v-bind:src="imgUrl">
-            </div>
-</div>
+    <div class="pokeImgsDiv">
+        <div class="pokeImgDiv" v-for="imgUrl of imgUrls" v-bind:key="imgUrls">
+            <img alt="pokemon" class="pokeImg" v-bind:src="imgUrl">
+        </div>
+    </div>
 </template>
 
 <script>
@@ -24,12 +24,11 @@
             }
         },
         mounted() {
-            for(let i=1; i<=151 ; i++ ) {
+            for (let i = 1; i <= 151; i++) {
                 this.imgUrls.push(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png`);
             }
         },
-        methods: {
-        }
+        methods: {}
     }
 </script>
 

@@ -1,7 +1,12 @@
 <template>
-    <div class="trainerListDiv" v-on:click="pushMyPokeList">
+    <div class="trainerListDiv">
+        <div class="card bg-primary text-white text-center p-3 titleDisplay">
+            <blockquote class="blockquote mb-0">
+                <p>トレーナー一覧</p>
+            </blockquote>
+        </div>
         <div class="trainersDiv" v-for="(trainer, idx) of trainers" :key="idx">
-            <div class="card text-white bg-primary mb-3">
+            <div class="card text-white bg-primary mb-3" v-on:click="pushMyPokeList(trainer.id)">
                 <div class="card-header">{{trainer.trainerName}}</div>
                 <div class="card-body">
                     <img class="card-title" src="../assets/img/trainer_leaf.jpeg"/>
@@ -49,9 +54,8 @@
             })
         },
         methods: {
-            pushMyPokeList() {
-                // TODO: トレーナーごとのポケモン表示 backend未済
-                this.$router.push(`/myPokeList`);
+            pushMyPokeList(id) {
+                this.$router.push(`/myPokeList?id=${id}`);
             }
         }
     }
@@ -86,6 +90,17 @@
 
     .pleaseCreate {
         width: 400px;
+    }
+
+    .titleDisplay {
+        margin-bottom: 30px;
+        height: 60px;
+        width: 400px;
+        text-align: center;
+        position: relative;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
     }
 
 </style>

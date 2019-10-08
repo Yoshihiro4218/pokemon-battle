@@ -1,5 +1,10 @@
 <template>
     <div class="trainerListDiv">
+        <div class="card bg-primary text-white text-center p-3 titleDisplay">
+            <blockquote class="blockquote mb-0">
+                <p>手持ちポケモン</p>
+            </blockquote>
+        </div>
         <div class="card-deck" v-for="imgUrl of imgUrls" v-bind:key="imgUrls">
             <div class="card">
                 <div class="pokeImgDiv">
@@ -46,7 +51,9 @@
             }
         },
         mounted() {
-            axios.get("/api/pockets").then((res) => {
+            let trainerId = this.$route.query["id"];
+            console.log(trainerId);
+            axios.get(`/api/pockets/${trainerId}`).then((res) => {
                 this.pokes = res.data;
                 console.log(res.data);
 
@@ -104,5 +111,17 @@
         margin-left: auto;
         margin-right: auto;
     }
+
+    .titleDisplay {
+        margin-bottom: 30px;
+        height: 60px;
+        width: 368px;
+        text-align: center;
+        position: relative;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
 
 </style>
