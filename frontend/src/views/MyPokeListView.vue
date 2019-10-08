@@ -5,13 +5,13 @@
                 <p>手持ちポケモン</p>
             </blockquote>
         </div>
-        <div class="card-deck" v-for="imgUrl of imgUrls" v-bind:key="imgUrls">
+        <div class="card-deck" v-for="(imgUrl, idx) of imgUrls" :key="idx">
             <div class="card">
                 <div class="pokeImgDiv">
                     <img alt="pokemon" class="pokeImg" v-bind:src="imgUrl">
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">{{pokeName[idx]}}</h5>
                     <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
                         additional content. This content is a little bit longer.</p>
                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
@@ -31,6 +31,7 @@
 
 <script>
     import axios from 'axios'
+    import json from '../assets/js/pokemon_translate';
     import store from '../store/index.js'
     import {mapState} from 'vuex'
 
@@ -42,6 +43,7 @@
                 pokes: [],
                 pokeExist: true,
                 imgUrls: [],
+                pokeName: [],
             }
         },
         components: {},
@@ -62,6 +64,19 @@
                 } else {
                     for (let i = 0; i <= this.pokes.length; i++) {
                         this.imgUrls.push(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.pokes[i].pkId}.png`);
+                        axios.get(`https://pokeapi.co/api/v2/pokemon/${this.pokes[i].pkId}`)
+                            .then((res) => {
+                                let nameEn = res.data.forms[0].name;
+                                console.log(nameEn);
+
+                                for (let i = 0; i < json.length; i++) {
+                                    if (json[i].en.toLowerCase() === nameEn) {
+                                        let nameJa = json[i].ja;
+                                        console.log(nameJa);
+                                        this.pokeName.push(nameJa);
+                                    }
+                                }
+                            })
                     }
                 }
             })
