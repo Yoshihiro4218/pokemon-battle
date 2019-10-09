@@ -69,13 +69,7 @@
                                 let nameEn = res.data.forms[0].name;
                                 console.log(nameEn);
 
-                                for (let i = 0; i < json.length; i++) {
-                                    if (json[i].en.toLowerCase() === nameEn) {
-                                        let nameJa = json[i].ja;
-                                        console.log(nameJa);
-                                        this.pokeName.push(nameJa);
-                                    }
-                                }
+                                this.pokeName = JSON.parse(json).filter(p => p.en.toLowerCase() === nameEn);
                             })
                     }
                 }
