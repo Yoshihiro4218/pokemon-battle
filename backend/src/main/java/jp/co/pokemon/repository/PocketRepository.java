@@ -7,6 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface PocketRepository {
+    // TODO: ORDER BY POSITION しないといけなかった
     List<Pocket> findByTrainerId(int trainerId);
     Pocket findOnePocketByTrainerId(int trainerId);
 }
