@@ -21,4 +21,18 @@
 
         WHERE trainer_id = #{trainer_id};
     </select>
+
+    <select id="findByTrainerIdOrderByPosition" resultMap="pocketResultMap">
+        SELECT id,
+        trainer_id,
+        position,
+        pk_id
+
+        FROM pokemon.pocket_pk
+
+        WHERE trainer_id = #{trainer_id}
+
+        ORDER BY position;
+    </select>
+
 </mapper>

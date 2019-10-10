@@ -9,5 +9,6 @@ import java.util.List;
 public interface PocketRepository {
     // TODO: ORDER BY POSITION しないといけなかった
     List<Pocket> findByTrainerId(int trainerId);
+    List<Pocket> findByTrainerIdOrderByPosition(int trainerId);
     Pocket findOnePocketByTrainerId(int trainerId);
 }

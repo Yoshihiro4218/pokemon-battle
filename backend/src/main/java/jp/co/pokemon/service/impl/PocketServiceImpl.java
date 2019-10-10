@@ -20,8 +20,8 @@ public class PocketServiceImpl implements PocketService {
     private final PocketRepository pocketRepository;
 
     @Override
-    public Optional<List<Pocket>> findByTrainerId(int trainerId) {
-        Optional<List<Pocket>> maybePocketPkList = Optional.ofNullable(pocketRepository.findByTrainerId(trainerId));
+    public Optional<List<Pocket>> findByTrainerIdOrderByPosition(int trainerId) {
+        Optional<List<Pocket>> maybePocketPkList = Optional.ofNullable(pocketRepository.findByTrainerIdOrderByPosition(trainerId));
         log.info("PocketPkList={}", maybePocketPkList);
         return maybePocketPkList;
     }

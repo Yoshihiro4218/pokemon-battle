@@ -33,7 +33,7 @@ public class PocketController {
         // TODO: そもそもJOINで取るべきです、ごめんなさい。。
         List<Pocket> pocketList = new ArrayList<>();
         for (Trainer trainer : trainerList) {
-            pocketList.addAll(pocketService.findByTrainerId(trainer.getId()).get());
+            pocketList.addAll(pocketService.findByTrainerIdOrderByPosition(trainer.getId()).get());
         }
         log.info("PocketList={}", pocketList);
         return pocketList;
@@ -47,7 +47,7 @@ public class PocketController {
                           .stream()
                           .filter(t -> t.getId() == trainerId)
                           .findFirst()
-                          .flatMap(t -> pocketService.findByTrainerId(t.getId()))
+                          .flatMap(t -> pocketService.findByTrainerIdOrderByPosition(t.getId()))
                           .orElseThrow(() -> new RuntimeException("No Pokemon..."));
     }
 }
