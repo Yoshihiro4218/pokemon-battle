@@ -14,12 +14,14 @@ services:
       - ./docker/mysql/data:/var/lib/mysql
       - ./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
 
-  redis:
-    image: "redis:latest"
+  cache:
+    build: ./docker/redis
     ports:
       - "6379:6379"
-    volumes:
-      - "./data/redis:/data"
+      # 6380:ローカル向けhttp通信用ポート
+      - "6380:6380"
+    environment:
+      REDIS_PASSWORD: "password"
 
   maildev:
     image: djfarrelly/maildev
