@@ -1,4 +1,6 @@
 spring:
+  thymeleaf:
+    mode: HTML
   datasource:
     url: jdbc:mysql://localhost:3306/pokemon
     driver-class-name: com.mysql.jdbc.Driver
@@ -6,6 +8,14 @@ spring:
     password: password
   main:
     allow-bean-definition-overriding: true
+  redis:
+    host: localhost
+    port: 6379
+    password: password
+    database: 0
+  mail:
+    host: localhost
+    port: 1025
 
 jpa:
   open-in-view: true
