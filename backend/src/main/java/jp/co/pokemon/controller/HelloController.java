@@ -2,6 +2,7 @@ package jp.co.pokemon.controller;
 
 import jp.co.pokemon.entity.User;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +33,21 @@ public class HelloController {
     public String postGreeting(@RequestParam(name = "message") String message) {
         return "hello " + message;
     }
+
+    @GetMapping("/cache")
+    public String cache() {
+       int sum = plus(2, 3);
+        return "Cache!:" + sum;
+    }
+
+    @Cacheable(cacheNames = "plus", key = "{#left,#right}")
+    public int plus(int left, int right) {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException ignored) {
+        }
+        return left + right;
+    }
+
 
 }
