@@ -14,6 +14,12 @@ spring:
   mail:
     host: localhost
     port: 1025
+#    host: smtp.gmail.com
+#    port: 587
+#    username: y.kadono.ffg@gmail.com
+#    password:
+#    properties.mail.smtp.auth: true
+#    properties.mail.smtp.starttls.enable: true
 
 jpa:
   open-in-view: true

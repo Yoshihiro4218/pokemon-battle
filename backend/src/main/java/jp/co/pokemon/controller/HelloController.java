@@ -63,7 +63,7 @@ public class HelloController {
     @GetMapping("/mail")
     public String sendMail() {
         String subject = "SUBJECT";
-        String addressTo = "y.kadono.ffg@gmail.com";
+        String addressTo = "y.kadono4218@gmail.com";
         String body = "MAIL_BODY";
 
         mailService.send(subject, addressTo, body);
