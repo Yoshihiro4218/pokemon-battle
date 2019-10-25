@@ -1,12 +1,15 @@
 package jp.co.pokemon.controller;
 
 import jp.co.pokemon.entity.*;
+import jp.co.pokemon.props.*;
 import jp.co.pokemon.repository.*;
+import jp.co.pokemon.service.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.utility.*;
 import org.apache.commons.lang3.*;
 import org.springframework.cache.annotation.*;
+import org.springframework.mail.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +23,7 @@ import java.util.*;
 public class HelloController {
 
     private final RedisRepository redisRepository;
+    private final MailService mailService;
 
     @GetMapping
     public String greeting() {
@@ -56,4 +60,13 @@ public class HelloController {
         return redisRepository.find("TOKEN", i);
     }
 
+    @GetMapping("/mail")
+    public String sendMail() {
+        String subject = "SUBJECT";
+        String addressTo = "y.kadono.ffg@gmail.com";
+        String body = "MAIL_BODY";
+
+        mailService.send(subject, addressTo, body);
+        return "SEND!!";
+    }
 }
