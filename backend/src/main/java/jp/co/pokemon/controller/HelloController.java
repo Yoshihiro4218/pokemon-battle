@@ -1,6 +1,6 @@
 package jp.co.pokemon.controller;
 
-import jp.co.pokemon.entity.User;
+import jp.co.pokemon.entity.*;
 import jp.co.pokemon.repository.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -45,9 +45,15 @@ public class HelloController {
 
     @GetMapping("/cache")
     public String cache() {
-        String random = RandomStringUtils.random(5);
-        redisRepository.save("TOKEN", "CATEGORY", random);
-        return random;
+        int i = (int)(Math.random()*10);
+        String uuid = UUID.randomUUID().toString();
+        redisRepository.save("TOKEN", "CATEGORY-" + i, uuid);
+        return "CATEGORY:" + i + "::VALUE=" + uuid;
+    }
+
+    @GetMapping("/cache/{category}")
+    public String cacheGet(@PathVariable("category")int i) {
+        return redisRepository.find("TOKEN", i);
     }
 
 }
