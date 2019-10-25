@@ -1,16 +1,25 @@
 package jp.co.pokemon.controller;
 
 import jp.co.pokemon.entity.User;
+import jp.co.pokemon.repository.*;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import net.bytebuddy.utility.*;
+import org.apache.commons.lang3.*;
 import org.springframework.cache.annotation.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.*;
+
 @RestController
 @RequestMapping(path = "hello")
+@AllArgsConstructor
 @Slf4j
 public class HelloController {
+
+    private final RedisRepository redisRepository;
 
     @GetMapping
     public String greeting() {
@@ -36,18 +45,9 @@ public class HelloController {
 
     @GetMapping("/cache")
     public String cache() {
-       int sum = plus(2, 3);
-        return "Cache!:" + sum;
+        String random = RandomStringUtils.random(5);
+        redisRepository.save("TOKEN", "CATEGORY", random);
+        return random;
     }
-
-    @Cacheable(cacheNames = "plus", key = "{#left,#right}")
-    public int plus(int left, int right) {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException ignored) {
-        }
-        return left + right;
-    }
-
 
 }

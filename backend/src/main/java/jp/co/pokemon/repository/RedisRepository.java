@@ -24,8 +24,8 @@ public class RedisRepository {
 //        return hashOps.get(key);
 //    }
 
-    public void savePinCode(String emailVerifyToken, String category, String value) {
-        hashOps.put(emailVerifyToken, category, value);
+    public void save(String token, String category, String value) {
+        hashOps.put(token, category, value);
     }
 
 //    public XxxEntity findPinCodeCredential(String key) {
