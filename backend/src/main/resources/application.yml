@@ -1,4 +1,6 @@
 spring:
+  thymeleaf:
+    mode: HTML
   datasource:
     url: jdbc:mysql://localhost:3306/pokemon
     driver-class-name: com.mysql.jdbc.Driver
@@ -6,6 +8,18 @@ spring:
     password: password
   main:
     allow-bean-definition-overriding: true
+  redis:
+    host: localhost
+    port: 6379
+  mail:
+    host: localhost
+    port: 1025
+#    host: smtp.gmail.com
+#    port: 587
+#    username: y.kadono.ffg@gmail.com
+#    password:
+#    properties.mail.smtp.auth: true
+#    properties.mail.smtp.starttls.enable: true
 
 jpa:
   open-in-view: true
@@ -23,3 +37,8 @@ server:
   port: 8090
   servlet:
     context-path: /api
+
+#==================================================
+example:
+  mail:
+    from: from@kadono.com

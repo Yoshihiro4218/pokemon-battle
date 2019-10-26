@@ -5,6 +5,7 @@ import Test from '../views/TestView'
 import PokeList from '../views/PokeListView'
 import TrainerList from '../views/TrainerListView'
 import MyPokeList from '../views/MyPokeListView'
+import UserRegisterForm from '../views/UserRegisterForm'
 
 Vue.use(Router);
 
@@ -35,6 +36,11 @@ export default new Router({
             path: '/myPokeList',
             name: 'myPokeList',
             component: MyPokeList
+        },
+        {
+            path: '/userRegisterForm',
+            name: 'userRegisterForm',
+            component: UserRegisterForm
         },
     ]
 })
