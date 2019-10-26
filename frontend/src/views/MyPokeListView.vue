@@ -54,24 +54,37 @@
         },
         mounted() {
             let trainerId = this.$route.query["id"];
-            console.log(trainerId);
             axios.get(`/api/pockets/${trainerId}`).then((res) => {
                 this.pokes = res.data;
-                console.log(res.data);
+                console.log(this.pokes.length);
 
                 if (this.pokes.length === 0) {
                     this.pokeExist = false;
                 } else {
-                    for (let i = 0; i <= this.pokes.length; i++) {
+                    for (let i = 0; i < this.pokes.length; i++) {
+                        console.log('-------pokeId---------');
+                        console.log(this.pokes[i].pkId);
                         this.imgUrls.push(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.pokes[i].pkId}.png`);
+                    }
+                    for (let i = 0; i < this.pokes.length; i++) {
                         axios.get(`https://pokeapi.co/api/v2/pokemon/${this.pokes[i].pkId}`)
-                            .then((res) => {
-                                let nameEn = res.data.forms[0].name;
-                                console.log(nameEn);
+                            .then((res2) => {
+                                let nameEn = res2.data.forms[0].name;
+                                console.log(nameEn)
 
-                                this.pokeName = JSON.parse(json).filter(p => p.en.toLowerCase() === nameEn);
+
+                                for (let j = 0; j < json.length; j++) {
+                                    if (json[j].en.toLowerCase() === nameEn) {
+                                        let nameJa = json[j].ja;
+                                        console.log(nameJa);
+                                        this.pokeName.push(nameJa);
+                                    }
+                                }
+
+                                // this.pokeName.push(JSON.parse(json).filter(p => p.en.toLowerCase() === nameEn));
                             })
                     }
+
                 }
             })
         },
