@@ -66,24 +66,24 @@
                         console.log(this.pokes[i].pkId);
                         this.imgUrls.push(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.pokes[i].pkId}.png`);
                     }
-                    for (let i = 0; i < this.pokes.length; i++) {
-                        axios.get(`https://pokeapi.co/api/v2/pokemon/${this.pokes[i].pkId}`)
-                            .then((res2) => {
-                                let nameEn = res2.data.forms[0].name;
-                                console.log(nameEn)
-
-
-                                for (let j = 0; j < json.length; j++) {
-                                    if (json[j].en.toLowerCase() === nameEn) {
-                                        let nameJa = json[j].ja;
-                                        console.log(nameJa);
-                                        this.pokeName.push(nameJa);
-                                    }
-                                }
-
-                                // this.pokeName.push(JSON.parse(json).filter(p => p.en.toLowerCase() === nameEn));
-                            })
-                    }
+                    // for (let i = 0; i < this.pokes.length; i++) {
+                    //     axios.get(`https://pokeapi.co/api/v2/pokemon/${this.pokes[i].pkId}`)
+                    //         .then((res2) => {
+                    //             let nameEn = res2.data.forms[0].name;
+                    //             console.log(nameEn)
+                    //
+                    //
+                    //             for (let j = 0; j < json.length; j++) {
+                    //                 if (json[j].en.toLowerCase() === nameEn) {
+                    //                     let nameJa = json[j].ja;
+                    //                     console.log(nameJa);
+                    //                     this.pokeName.push(nameJa);
+                    //                 }
+                    //             }
+                    //
+                    //             // this.pokeName.push(JSON.parse(json).filter(p => p.en.toLowerCase() === nameEn));
+                    //         })
+                    // }
 
                 }
             })
