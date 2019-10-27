@@ -2,6 +2,7 @@ package jp.co.pokemon.controller;
 
 import jp.co.pokemon.entity.User;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,11 @@ public class UserController {
     @PostMapping(path = "echo", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String postEcho(@RequestBody Map<String, String> message) {
         return message.toString();
+    }
+
+    @GetMapping("/name")
+    public String getUserName(Authentication authentication) {
+        return authentication.getName();
     }
 
 }

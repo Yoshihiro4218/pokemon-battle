@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 @AllArgsConstructor
-public class CreateUserController {
+public class UserRegisterController {
     private final UserService userService;
 
     @PostMapping("/new")
-    public String newUser(@ModelAttribute NewUser newUser) {
-        log.info("NewUser={}", newUser);
-        return userService.create(newUser.getName(), newUser.getPassword(), newUser.getEmail());
+    public String newUser(@ModelAttribute UserRegisterForm userRegisterForm) {
+        log.info("NewUser={}", userRegisterForm);
+        return userService.create(userRegisterForm.getName(), userRegisterForm.getPassword(), userRegisterForm.getEmail());
     }
 
     @Data
-    public static class NewUser {
+    public static class UserRegisterForm {
         private String name;
         private String password;
         private String email;

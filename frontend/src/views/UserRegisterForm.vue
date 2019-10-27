@@ -9,68 +9,40 @@
             <div class="card-header">Register</div>
             <div class="card-body">
               <form name="my-form" onsubmit="return validform()" action="success.php" method="">
+
                 <div class="form-group row">
-                  <label for="full_name" class="col-md-4 col-form-label text-md-right">Full
-                    Name</label>
+                  <label for="user_name" class="col-md-4 col-form-label text-md-right">ユーザーネーム</label>
                   <div class="col-md-6">
-                    <input type="text" id="full_name" class="form-control" name="full-name">
+                    <input type="text" id="user_name" class="form-control" name="name">
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail
-                    Address</label>
+                  <label for="email_address" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
                   <div class="col-md-6">
-                    <input type="text" id="email_address" class="form-control" name="email-address">
+                    <input type="text" id="email_address" class="form-control" name="email">
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label for="user_name" class="col-md-4 col-form-label text-md-right">User
-                    Name</label>
+                  <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
                   <div class="col-md-6">
-                    <input type="text" id="user_name" class="form-control" name="username">
+                    <input type="password" id="password" class="form-control" name="password">
                   </div>
                 </div>
 
-                <div class="form-group row">
-                  <label for="phone_number" class="col-md-4 col-form-label text-md-right">Phone
-                    Number</label>
-                  <div class="col-md-6">
-                    <input type="text" id="phone_number" class="form-control">
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label for="present_address" class="col-md-4 col-form-label text-md-right">Present
-                    Address</label>
-                  <div class="col-md-6">
-                    <input type="text" id="present_address" class="form-control">
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Permanent
-                    Address</label>
-                  <div class="col-md-6">
-                    <input type="text" id="permanent_address" class="form-control"
-                           name="permanent-address">
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label for="nid_number" class="col-md-4 col-form-label text-md-right"><abbr
-                      title="National Id Card">NID</abbr> Number</label>
-                  <div class="col-md-6">
-                    <input type="text" id="nid_number" class="form-control" name="nid-number">
-                  </div>
-                </div>
+<!--                <div class="form-group row">-->
+<!--                  <label for="confirm" class="col-md-4 col-form-label text-md-right">パスワード（確認）</label>-->
+<!--                  <div class="col-md-6">-->
+<!--                    <input type="password" id="confirm" class="form-control" name="confirm"-->
+<!--                           v-on:input="checkPassword">-->
+<!--                  </div>-->
+<!--                </div>-->
 
                 <div class="col-md-6 offset-md-4">
-                  <button type="submit" class="btn btn-primary">
-                    Register
-                  </button>
+                  <button type="button" class="btn btn-primary" v-on:click="register">登録する</button>
                 </div>
+
               </form>
             </div>
           </div>
@@ -108,20 +80,28 @@
       })
     },
     methods: {
-      login() {
+      register() {
         let params = new URLSearchParams();
-        params.append('email', document.getElementById("email").value);
-        params.append('pass', document.getElementById("password").value);
+        params.append('name', document.getElementById("user_name").value);
+        params.append('email', document.getElementById("email_address").value);
+        params.append('password', document.getElementById("password").value);
         params.append('_csrf', this.csrf);
-        console.log(document.getElementById("email").value);
-        console.log(this.csrf);
-        console.log(params);
-        axios.post("/api/login", params).then((res) => {
-          console.log(res)
-          this.$router.push("/trainerList")
-
+        axios.post("/api/user/new", params).then((res) => {
+          this.$router.push("/login")
         });
-      }
+      },
+      // checkPassword(confirm){
+      //   // 入力値取得
+      //   let input1 = document.getElementById('password').value;
+      //   let input2 = document.getElementById('confirm').value;
+      //   console.log(input1 + "|||" +  input2)
+      //   // パスワード比較
+      //   if(input1 !== input2){
+      //     confirm.setCustomValidity("入力値が一致しません。");
+      //   }else{
+      //     confirm.setCustomValidity('');
+      //   }
+      // }
     }
   }
 </script>
@@ -148,6 +128,14 @@
     width: 500px;
     text-align: center;
   }
+
+    .form-control {
+      width: 150%;
+    }
+
+    .col-form-label {
+      font-size: small;
+    }
 
     body {
     margin: 0;

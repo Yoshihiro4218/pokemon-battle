@@ -2,7 +2,7 @@
     <div class="trainerListDiv">
         <div class="card bg-primary text-white text-center p-3 titleDisplay">
             <blockquote class="blockquote mb-0">
-                <p>トレーナー一覧</p>
+                <p>{{username}}さんのトレーナー一覧</p>
             </blockquote>
         </div>
         <div class="trainersDiv" v-for="(trainer, idx) of trainers" :key="idx">
@@ -38,6 +38,7 @@
                 items: [],
                 trainers: [],
                 trainerExist: true,
+                username: "",
             }
         },
         components: {},
@@ -51,7 +52,12 @@
                 this.trainers = res.data;
                 if (res.data.length === 0) this.trainerExist = false;
                     console.log(res.data);
-            })
+            });
+
+            axios.get("/api/user/name").then((res) => {
+                this.username = res.data;
+                console.log(res.data);
+            });
         },
         methods: {
             pushMyPokeList(id) {

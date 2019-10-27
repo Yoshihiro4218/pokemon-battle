@@ -1,6 +1,7 @@
 <template>
     <div class="loginDiv">
         <h2>LoginForm!!</h2>
+        <router-link class="routerLink" to="/userRegisterForm">未登録の方はこちらでユーザ登録をしてください<br></router-link>
 
         <form name="loginForm">
             <div class="form-group">
@@ -19,7 +20,7 @@
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
-            <button type="button" class="btn btn-primary" v-on:click="login">Submit</button>
+            <button type="button" class="btn btn-primary" v-on:click="login">ログイン</button>
         </form>
     </div>
 </template>
