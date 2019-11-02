@@ -71,20 +71,30 @@
             pushPoke(idx) {
                 console.log("selected poke is...");
                 console.log(idx + 1);
-
-                if (this.selectedPokes.length < 6) {
-                    this.selectedPokes.push(idx + 1);
-                    console.log("pokes=" + this.selectedPokes);
+                if (this.searchSamePoke(idx + 1)) {
+                    console.log("削除します！" + idx);
+                    let newList = this.selectedPokes.filter(id => id !== idx + 1);
+                    this.selectedPokes.length = 0;
+                    this.selectedPokes = newList;
+                    console.log(this.selectedPokes);
                 } else {
-                    this.pokeMaxFlg = true;
-                    alert("ポケモンが6匹選択されいます。選び直す場合は一度クリアしてください。");
-                    console.log("Max!!");
+                    if (this.selectedPokes.length < 6) {
+                        this.selectedPokes.push(idx + 1);
+                        console.log("pokes=" + this.selectedPokes);
+                    } else {
+                        this.pokeMaxFlg = true;
+                        alert("ポケモンが6匹選択されいます。選び直す場合は一度クリアしてください。");
+                        console.log("Max!!");
+                    }
                 }
             },
             clearPokes() {
                 this.selectedPokes.length = 0;
                 this.pokeMaxFlg = false;
                 console.log("selected pokes were cleared!");
+            },
+            searchSamePoke(idx) {
+                return this.selectedPokes.find(poke => poke === idx) !== undefined;
             }
         }
     }
