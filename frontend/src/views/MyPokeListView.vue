@@ -5,6 +5,11 @@
                 <p>手持ちポケモン</p>
             </blockquote>
         </div>
+        <div class="card bg-success text-white text-center p-3 titleDisplay allPoke" v-on:click="pushPokeList()">
+            <blockquote class="blockquote mb-0">
+                <p>全ポケモン一覧</p>
+            </blockquote>
+        </div>
         <div class="card-deck" v-for="(imgUrl, idx) of imgUrls" :key="idx">
             <div class="card">
                 <div class="pokeImgDiv">
@@ -88,7 +93,12 @@
                 }
             })
         },
-        methods: {}
+        methods: {
+            pushPokeList() {
+                let trainerId = this.$route.query["id"];
+                this.$router.push(`/pokeList?id=${trainerId}`);
+            }
+        }
     }
 </script>
 
@@ -145,5 +155,9 @@
         margin-left: auto;
     }
 
+    .allPoke:hover {
+        cursor: pointer;
+        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .5);
+    }
 
 </style>
