@@ -15,21 +15,21 @@
         </div>
 
         <div class="buttonDiv">
-            <div class="card bg-success text-white text-center p-3 titleDisplay allPoke"
+            <div class="card bg-success text-white text-center p-3 titleDisplay buttons"
                  v-on:click="returnPreviousPage()">
                 <blockquote class="blockquote mb-0">
                     <p>決定</p>
                 </blockquote>
             </div>
 
-            <div class="card bg-info text-white text-center p-3 titleDisplay allPoke"
+            <div class="card bg-info text-white text-center p-3 titleDisplay buttons"
                  v-on:click="clearPokes()">
                 <blockquote class="blockquote mb-0">
                     <p>クリア</p>
                 </blockquote>
             </div>
 
-            <div class="card bg-danger text-white text-center p-3 titleDisplay allPoke"
+            <div class="card bg-danger text-white text-center p-3 titleDisplay buttons"
                  v-on:click="returnPreviousPage()">
                 <blockquote class="blockquote mb-0">
                     <p>キャンセル</p>
@@ -136,6 +136,11 @@
         box-sizing: border-box;
         margin-right: auto;
         margin-left: auto;
+    }
+
+    .buttons:hover {
+        cursor: pointer;
+        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .5);
     }
 
 </style>
