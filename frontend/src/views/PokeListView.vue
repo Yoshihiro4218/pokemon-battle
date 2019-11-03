@@ -76,6 +76,7 @@
                     let newList = this.selectedPokes.filter(id => id !== idx + 1);
                     this.selectedPokes.length = 0;
                     this.selectedPokes = newList;
+                    this.pokeMaxFlg = false;
                     console.log(this.selectedPokes);
                 } else {
                     if (this.selectedPokes.length < 6) {
