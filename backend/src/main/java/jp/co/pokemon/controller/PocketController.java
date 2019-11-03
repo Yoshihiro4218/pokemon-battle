@@ -8,10 +8,7 @@ import jp.co.pokemon.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,5 +46,15 @@ public class PocketController {
                           .findFirst()
                           .flatMap(t -> pocketService.findByTrainerIdOrderByPosition(t.getId()))
                           .orElseThrow(() -> new RuntimeException("No Pokemon..."));
+    }
+
+    @PostMapping("/{trainerId}")
+    public void postNewPkList(@PathVariable int trainerId,
+                              @RequestParam List<Integer> pkList,
+                              Authentication authentication) {
+        userService.sessionUser(authentication)
+                   .flatMap(u -> trainerService.findByUserId(u.getId().intValue()))
+                   .orElseThrow(() -> new RuntimeException("No Trainer..."));
+        pocketService.updateMyPokes(trainerId, pkList);
     }
 }

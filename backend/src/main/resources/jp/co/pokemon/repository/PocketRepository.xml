@@ -5,10 +5,10 @@
 
 <mapper namespace="jp.co.pokemon.repository.PocketRepository">
     <resultMap id="pocketResultMap" type="jp.co.pokemon.entity.Pocket">
-        <id property="id" column="id" />
-        <result property="trainerId" column="trainer_id" />
-        <result property="position" column="position" />
-        <result property="pkId" column="pk_id" />
+        <id property="id" column="id"/>
+        <result property="trainerId" column="trainer_id"/>
+        <result property="position" column="position"/>
+        <result property="pkId" column="pk_id"/>
     </resultMap>
 
     <select id="findByTrainerId" resultMap="pocketResultMap">
@@ -24,9 +24,9 @@
 
     <select id="findByTrainerIdOrderByPosition" resultMap="pocketResultMap">
         SELECT id,
-        trainer_id,
-        position,
-        pk_id
+               trainer_id,
+               position,
+               pk_id
 
         FROM pokemon.pocket_pk
 
@@ -34,5 +34,18 @@
 
         ORDER BY position;
     </select>
+
+    <insert id="create">
+        INSERT INTO pokemon.pocket_pk
+        SET trainer_id = #{trainerId},
+            position   = #{position},
+            pk_id      = #{pkId}
+    </insert>
+
+    <update id="delete">
+        DELETE
+        FROM pokemon.pocket_pk
+        WHERE trainer_id = #{trainerId}
+    </update>
 
 </mapper>

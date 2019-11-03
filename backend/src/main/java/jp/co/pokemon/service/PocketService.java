@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface PocketService {
 
     Optional<List<Pocket>> findByTrainerIdOrderByPosition(int trainerId);
+    void updateMyPokes(int trainerId, List<Integer> pokeList);
 }

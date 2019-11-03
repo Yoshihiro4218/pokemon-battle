@@ -11,4 +11,6 @@ public interface PocketRepository {
     List<Pocket> findByTrainerId(int trainerId);
     List<Pocket> findByTrainerIdOrderByPosition(int trainerId);
     Pocket findOnePocketByTrainerId(int trainerId);
+    int create(Pocket pocket);
+    int delete(int trainerId);
 }
