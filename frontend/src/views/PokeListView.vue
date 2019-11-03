@@ -51,6 +51,7 @@
                 imgUrls: [],
                 selectedPokes: [],
                 pokeMaxFlg: false,
+                selected: false,
             }
         },
         components: {},
