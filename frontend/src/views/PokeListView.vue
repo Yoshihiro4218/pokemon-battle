@@ -7,7 +7,7 @@
 
         <div class="pokeImgDiv" v-for="(imgUrl, idx) of imgUrls" :key="idx">
             <img alt="pokemon" class="pokeImg" v-bind:src="imgUrl"
-                 v-on:click="pushPoke(idx)">
+                 v-on:click="pushPoke(idx)" v-bind:class="{selected: pokeMatched(idx)}">
         </div>
 
         <div class="card text-white bg-danger trainersDiv pleaseCreate" v-if="pokeMaxFlg===true">
@@ -71,7 +71,7 @@
             pushPoke(idx) {
                 console.log("selected poke is...");
                 console.log(idx + 1);
-                if (this.searchSamePoke(idx + 1)) {
+                if (this.pokeMatched(idx)) {
                     console.log("削除します！" + idx);
                     let newList = this.selectedPokes.filter(id => id !== idx + 1);
                     this.selectedPokes.length = 0;
@@ -94,8 +94,8 @@
                 this.pokeMaxFlg = false;
                 console.log("selected pokes were cleared!");
             },
-            searchSamePoke(idx) {
-                return this.selectedPokes.find(poke => poke === idx) !== undefined;
+            pokeMatched(idx) {
+                return this.selectedPokes.find(poke => poke === idx + 1) !== undefined;
             }
         }
     }
@@ -122,6 +122,11 @@
         color: red;
         cursor: pointer;
         outline: 1px solid gray;
+    }
+
+    .selected {
+        color: red;
+        outline: 1px solid red;
     }
 
 
