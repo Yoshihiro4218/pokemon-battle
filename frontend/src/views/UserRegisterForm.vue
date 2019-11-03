@@ -86,7 +86,7 @@
         params.append('email', document.getElementById("email_address").value);
         params.append('password', document.getElementById("password").value);
         params.append('_csrf', this.csrf);
-        axios.post("/api/user/new", params).then((res) => {
+        axios.post("/api/user/new", params).then(() => {
           this.$router.push("/login")
         });
       },

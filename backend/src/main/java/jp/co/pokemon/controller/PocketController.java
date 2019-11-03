@@ -49,9 +49,10 @@ public class PocketController {
     }
 
     @PostMapping("/{trainerId}")
-    public void postNewPkList(@PathVariable int trainerId,
-                              @RequestParam List<Integer> pkList,
+    public void postNewPkList(@PathVariable("trainerId") int trainerId,
+                              @RequestParam("pkList") List<Integer> pkList,
                               Authentication authentication) {
+        log.info("NewPokes={}", pkList);
         userService.sessionUser(authentication)
                    .flatMap(u -> trainerService.findByUserId(u.getId().intValue()))
                    .orElseThrow(() -> new RuntimeException("No Trainer..."));

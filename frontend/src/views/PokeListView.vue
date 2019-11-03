@@ -16,7 +16,7 @@
 
         <div class="buttonDiv">
             <div class="card bg-success text-white text-center p-3 titleDisplay buttons"
-                 v-on:click="returnPreviousPage()">
+                 v-on:click="register">
                 <blockquote class="blockquote mb-0">
                     <p>決定</p>
                 </blockquote>
@@ -42,6 +42,7 @@
 
 <script>
     import axios from 'axios'
+    import Cookies from 'js-cookie';
 
     export default {
         name: "PokeListView",
@@ -97,7 +98,19 @@
             },
             pokeMatched(idx) {
                 return this.selectedPokes.find(poke => poke === idx + 1) !== undefined;
-            }
+            },
+            register() {
+                let csrf = Cookies.get("XSRF-TOKEN");
+
+                console.log("------------")
+                console.log(csrf)
+                // let trainerId = this.$route.query["id"];
+                // let params = new URLSearchParams();
+                // params.append('pkList', this.selectedPokes);
+                // axios.post("/api/pockets/" + trainerId, params).then(() => {
+                //     this.returnPreviousPage(trainerId);
+                // });
+            },
         }
     }
 </script>
