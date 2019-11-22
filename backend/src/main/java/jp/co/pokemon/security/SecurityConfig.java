@@ -62,10 +62,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
              // CSRF
             .csrf()
-                //.disable()
+                .disable()
                 //.ignoringAntMatchers("/login")
-                .csrfTokenRepository(new CookieCsrfTokenRepository())
-            .and()
+//                .csrfTokenRepository(new CookieCsrfTokenRepository())
+//            .and()
             // SESSION
             .sessionManagement()
                 .maximumSessions(1)
