@@ -2,15 +2,30 @@
     <div class="trainerListDiv">
         <div class="card bg-primary text-white text-center p-3 titleDisplay">
             <blockquote class="blockquote mb-0">
-                <p>手持ちポケモン</p>
+                <p style="font-size: 120%"><b>手持ちポケモン</b></p>
             </blockquote>
         </div>
-        <div class="card bg-success text-white text-center p-3 titleDisplay allPoke" v-on:click="pushPokeList()">
+        <div class="card bg-info text-white text-center p-3 titleDisplay allPoke" v-on:click="pushPokeList()">
             <blockquote class="blockquote mb-0">
                 <p>全ポケモン一覧</p>
             </blockquote>
         </div>
-        <div class="card-deck" v-for="(imgUrl, idx) of imgUrls" :key="idx">
+
+        <div class="card text-white bg-success mb-3 text-center p-3 titleDisplay ready"
+             v-if="battleFlg === true">
+            <blockquote class="blockquote mb-0">
+                <p>準備完了！</p>
+            </blockquote>
+        </div>
+
+        <div class="card text-white bg-warning mb-3 text-center p-3 titleDisplay ready"
+             v-else>
+            <blockquote class="blockquote mb-0">
+                <p>準備中...</p>
+            </blockquote>
+        </div>
+
+        <div class="card-deck" v-for="(imgUrl, idx) of imgUrls" :key="idx" style="margin-top: 20px">
             <div class="card">
                 <div class="pokeImgDiv">
                     <img alt="pokemon" class="pokeImg" v-bind:src="imgUrl">
@@ -24,7 +39,8 @@
             </div>
         </div>
 
-        <div class="card text-white bg-danger trainersDiv pleaseCreate" v-if="pokeExist===false">
+        <div class="card text-white bg-danger trainersDiv pleaseCreate"
+             v-if="pokeExist===false" v-on:click="pushPokeList()">
             <div class="card-header">ポケモンがまだいないようです</div>
             <div class="card-body">
                 <p class="card-text">クリックでポケモンを登録しよう！</p>
@@ -49,6 +65,7 @@
                 pokeExist: true,
                 imgUrls: [],
                 pokeName: [],
+                battleFlg: false,
             }
         },
         components: {},
@@ -112,6 +129,11 @@
 
     .trainersDiv:hover {
         color: red;
+        cursor: pointer;
+        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .5);
+    }
+
+    .ready:hover {
         cursor: pointer;
         box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .5);
     }
