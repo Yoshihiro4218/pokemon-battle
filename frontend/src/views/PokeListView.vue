@@ -100,16 +100,16 @@
                 return this.selectedPokes.find(poke => poke === idx + 1) !== undefined;
             },
             register() {
-                let csrf = Cookies.get("XSRF-TOKEN");
-
-                console.log("------------")
-                console.log(csrf)
-                // let trainerId = this.$route.query["id"];
-                // let params = new URLSearchParams();
-                // params.append('pkList', this.selectedPokes);
-                // axios.post("/api/pockets/" + trainerId, params).then(() => {
-                //     this.returnPreviousPage(trainerId);
-                // });
+                // let csrf = Cookies.get("XSRF-TOKEN");
+                //
+                // console.log("------------")
+                // console.log(csrf)
+                let trainerId = this.$route.query["id"];
+                let params = new URLSearchParams();
+                params.append('pkList', this.selectedPokes);
+                axios.post("/api/pockets/" + trainerId, params).then(() => {
+                    this.returnPreviousPage(trainerId);
+                });
             },
         }
     }
