@@ -45,18 +45,20 @@
             }
         },
         mounted() {
-            axios.get("/api/prelogin")
-                .then((res) => {
-                    console.log(res.data);
-                    this.csrf = res.data;
-                })
+            // TODO: csrf対策を一時的にoffにしているのでコメントアウト
+            // axios.get("/api/prelogin")
+            //     .then((res) => {
+            //         console.log(res.data);
+            //         this.csrf = res.data;
+            //     })
         },
         methods: {
             login() {
                 let params = new URLSearchParams();
                 params.append('email', document.getElementById("email").value);
                 params.append('pass', document.getElementById("password").value);
-                params.append('_csrf', this.csrf);
+                // TODO: csrf対策を一時的にoffにしているのでコメントアウト
+                // params.append('_csrf', this.csrf);
                 console.log(document.getElementById("email").value);
                 console.log(this.csrf);
                 console.log(params);
