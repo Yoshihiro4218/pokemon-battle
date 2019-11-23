@@ -5,6 +5,11 @@
                 <p>{{username}}さんのトレーナー一覧</p>
             </blockquote>
         </div>
+        <div class="card bg-success text-white text-center p-3 titleDisplay createTrainer" v-on:click="createTrainer()">
+            <blockquote class="blockquote mb-0">
+                <p>トレーナーの登録をする</p>
+            </blockquote>
+        </div>
         <div class="trainersDiv" v-for="(trainer, idx) of trainers" :key="idx">
             <div class="card text-white bg-primary mb-3" v-on:click="pushMyPokeList(trainer.id)">
                 <div class="card-header">{{trainer.trainerName}}</div>
@@ -62,6 +67,9 @@
         methods: {
             pushMyPokeList(id) {
                 this.$router.push(`/myPokeList?id=${id}`);
+            },
+            createTrainer() {
+                this.$router.push(`/trainerRegisterForm`);
             }
         }
     }
@@ -107,6 +115,11 @@
         display: block;
         margin-right: auto;
         margin-left: auto;
+    }
+
+    .createTrainer:hover {
+        cursor: pointer;
+        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .5);
     }
 
 </style>

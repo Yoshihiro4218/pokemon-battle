@@ -6,6 +6,7 @@ import PokeList from '../views/PokeListView'
 import TrainerList from '../views/TrainerListView'
 import MyPokeList from '../views/MyPokeListView'
 import UserRegisterForm from '../views/UserRegisterForm'
+import TrainerRegisterForm from '../views/TrainerRegisterForm'
 
 Vue.use(Router);
 
@@ -41,6 +42,11 @@ export default new Router({
             path: '/userRegisterForm',
             name: 'userRegisterForm',
             component: UserRegisterForm
+        },
+        {
+            path: '/trainerRegisterForm',
+            name: 'trainerRegisterForm',
+            component: TrainerRegisterForm
         },
     ]
 })
