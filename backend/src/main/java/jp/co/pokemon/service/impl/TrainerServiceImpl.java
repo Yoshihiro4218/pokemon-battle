@@ -1,5 +1,6 @@
 package jp.co.pokemon.service.impl;
 
+import jp.co.pokemon.controller.TrainerController;
 import jp.co.pokemon.entity.Trainer;
 import jp.co.pokemon.repository.TrainerRepository;
 import jp.co.pokemon.service.TrainerService;
@@ -29,5 +30,10 @@ public class TrainerServiceImpl implements TrainerService {
     @Override
     public Optional<Trainer> findByTrainerId(int trainerId) {
         return Optional.ofNullable(trainerRepository.findByTrainerId(trainerId));
+    }
+
+    @Override
+    public void create(long userId, String trainerName) {
+        trainerRepository.create(userId, trainerName);
     }
 }

@@ -59,14 +59,11 @@
         },
         methods: {
             register() {
-                // let params = new URLSearchParams();
-                // params.append('name', document.getElementById("user_name").value);
-                // params.append('email', document.getElementById("email_address").value);
-                // params.append('password', document.getElementById("password").value);
-                // params.append('_csrf', this.csrf);
-                // axios.post("/api/user/new", params).then(() => {
-                //     this.$router.push("/login")
-                // });
+                let params = new URLSearchParams();
+                params.append('trainerName', document.getElementById("trainer_name").value);
+                axios.post("/api/trainers", params).then(() => {
+                    this.$router.push("/trainerList")
+                });
             },
             returnPreviousPage() {
                 this.$router.push(`/trainerList`);

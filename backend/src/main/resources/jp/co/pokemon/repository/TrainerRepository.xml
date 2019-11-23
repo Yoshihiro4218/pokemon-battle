@@ -5,12 +5,12 @@
 
 <mapper namespace="jp.co.pokemon.repository.TrainerRepository">
     <resultMap id="trainerResultMap" type="jp.co.pokemon.entity.Trainer">
-        <id property="id" column="id" />
-        <result property="userId" column="user_id" />
-        <result property="trainerName" column="trainer_name" />
-        <result property="winningCount" column="winning_count" />
-        <result property="losingCount" column="losing_count" />
-        <result property="battleFlg" column="battle_flg" />
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="trainerName" column="trainer_name"/>
+        <result property="winningCount" column="winning_count"/>
+        <result property="losingCount" column="losing_count"/>
+        <result property="battleFlg" column="battle_flg"/>
     </resultMap>
 
     <select id="findByUserId" resultMap="trainerResultMap">
@@ -38,5 +38,15 @@
 
         WHERE id = #{trainerId};
     </select>
+
+    <insert id="create">
+        INSERT INTO pokemon.trainer
+        SET user_id       = #{userId},
+            trainer_name  = #{trainerName},
+            winning_count = 0,
+            losing_count  = 0,
+            battle_flg    = false;
+
+    </insert>
 
 </mapper>
