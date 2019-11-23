@@ -36,7 +36,16 @@
 
         FROM pokemon.trainer
 
-        WHERE id = #{trainerId};
+        WHERE id = #{id};
+    </select>
+
+    <select id="battleFlg" resultType="boolean">
+        SELECT battle_flg
+
+        FROM pokemon.trainer
+
+        WHERE id = #{id}
+          AND user_id = #{userId};
     </select>
 
     <insert id="create">
@@ -48,5 +57,11 @@
             battle_flg    = false;
 
     </insert>
+
+    <update id="battleToggle">
+        UPDATE pokemon.trainer
+        SET battle_flg = #{battleFlg}
+        WHERE id = #{id}
+    </update>
 
 </mapper>

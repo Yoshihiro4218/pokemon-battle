@@ -36,4 +36,15 @@ public class TrainerServiceImpl implements TrainerService {
     public void create(long userId, String trainerName) {
         trainerRepository.create(userId, trainerName);
     }
+
+    @Override
+    public boolean battleToggle(long userId, int trainerId) {
+        if(trainerRepository.battleFlg(userId, trainerId)) {
+            trainerRepository.battleToggle(false, trainerId);
+            return false;
+        } else {
+            trainerRepository.battleToggle(true, trainerId);
+            return true;
+        }
+    }
 }

@@ -12,14 +12,14 @@
         </div>
 
         <div class="card text-white bg-success mb-3 text-center p-3 titleDisplay ready"
-             v-if="battleFlg === true">
+             v-if="battleFlg === true" v-on:click="battleToggle">
             <blockquote class="blockquote mb-0">
                 <p>準備完了！</p>
             </blockquote>
         </div>
 
         <div class="card text-white bg-warning mb-3 text-center p-3 titleDisplay ready"
-             v-else>
+             v-else v-on:click="battleToggle">
             <blockquote class="blockquote mb-0">
                 <p>準備中...</p>
             </blockquote>
@@ -78,7 +78,7 @@
             let trainerId = this.$route.query["id"];
             axios.get(`/api/pockets/${trainerId}`).then((res) => {
                 this.pokes = res.data;
-                console.log(this.pokes.length);
+                console.log(res.data);
 
                 if (this.pokes.length === 0) {
                     this.pokeExist = false;
@@ -108,12 +108,28 @@
                     // }
 
                 }
+                axios.get(`/api/trainers/battleToggle/${trainerId}`)
+                    .then((res) => {
+                        this.battleFlg = res.data;
+                    })
             })
         },
         methods: {
             pushPokeList() {
                 let trainerId = this.$route.query["id"];
                 this.$router.push(`/pokeList?id=${trainerId}`);
+            },
+            battleToggle() {
+                let trainerId = this.$route.query["id"];
+                axios.get(`/api/trainers/battleToggle/${trainerId}`)
+                    .then((res) => {
+                        this.battleFlg = res.data;
+                        if (res.data) {
+                            window.alert('自動的にランダムで対戦が行われます')
+                        } else {
+                            window.alert('準備中は対戦は行われません')
+                        }
+                    })
             }
         }
     }

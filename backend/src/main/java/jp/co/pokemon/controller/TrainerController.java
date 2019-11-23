@@ -7,10 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,8 +33,16 @@ public class TrainerController {
                            .create(u.getId(), form.getTrainerName()));
     }
 
+    @GetMapping("/battleToggle/{id}")
+    public boolean battleToggle(@PathVariable("id") int trainerId,
+                                Authentication authentication) {
+        return userService.sessionUser(authentication)
+                          .map(u -> trainerService
+                                  .battleToggle(u.getId(), trainerId)).get();
+    }
+
     @Value
-    public static class CreateTrainerForm {
+    private static class CreateTrainerForm {
         String trainerName;
     }
 }

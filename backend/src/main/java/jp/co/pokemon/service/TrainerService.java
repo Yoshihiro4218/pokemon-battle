@@ -12,4 +12,6 @@ public interface TrainerService {
     Optional<Trainer> findByTrainerId(int trainerId);
 
     void create(long userId, String trainerName);
+
+    boolean battleToggle(long userId, int trainerId);
 }
