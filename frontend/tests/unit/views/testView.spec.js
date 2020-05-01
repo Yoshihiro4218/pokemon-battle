@@ -14,10 +14,10 @@ describe('ExampleStack Page UT', () => {
   let target = null;
 
   beforeEach(() => {
-    target = shallowMount(TestView, {});
-    // Vue.filter('moneyDelemiter', function(val){
-    //   return Number(val).toLocaleString(); //3桁区切りでカンマをつける
-    // });
+    target = shallowMount(TestView, {Vue});
+    Vue.filter('moneyDelemiter', function(val){
+      return Number(val).toLocaleString(); //3桁区切りでカンマをつける
+    });
   });
 
   // it('inputを入力したとき、データに入力されるか', () => {
@@ -27,8 +27,8 @@ describe('ExampleStack Page UT', () => {
   // });
 
   it('test-price確認', () => {
-    // const actual = target.getElementById('for-test');
-    // expect(actual).toEqual('カイリュー逆鱗発動！');
+    const actual = target.find('#for-test').text();
+    expect(actual).toEqual('カイリュー逆鱗発動！');
 
     expect(1).toEqual(1);
   });
