@@ -3,3 +3,5 @@
 .idea
 .gitignore
 /docker/mysql/data/
+/backend/target/
+/backend/pokemon.iml

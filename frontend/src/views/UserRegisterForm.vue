@@ -1,6 +1,6 @@
 <template>
   <div class="registerDiv">
-    <h2>UserRegister!!</h2>
+    <h2 id="title">UserRegister!!</h2>
 
     <div class="cotainer">
       <div class="row justify-content-center">
