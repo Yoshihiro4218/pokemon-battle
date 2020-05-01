@@ -10,7 +10,7 @@ import TestView from '@/views/TestView';
 //   getCount: () => 123,
 // })));
 
-describe('ExampleStack Page UT', () => {
+describe('TestView UT', () => {
   let target = null;
 
   beforeEach(() => {
